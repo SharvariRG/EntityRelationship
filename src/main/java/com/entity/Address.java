@@ -20,15 +20,13 @@ public class Address {
 
 	@Column(nullable = false)
 	private String addressLine;
-	
+
 	private String addressType;
 	@JsonIgnore
-	//@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"}) 
-	@ManyToOne(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
-	private  Employee employee;
+	// @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private Employee employee;
 
-	
-	
 	public Address() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -73,6 +71,5 @@ public class Address {
 	public void setEmployee(Employee employee) {
 		this.employee = employee;
 	}
-	
-	
-}	
+
+}

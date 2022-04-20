@@ -1,22 +1,17 @@
 package com.entity;
 
-<<<<<<< HEAD
 import java.util.HashSet;
 import java.util.Set;
 
-=======
->>>>>>> c2194ce025a91c52ae5b2da9cf2fb991c7fe536a
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-<<<<<<< HEAD
+
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
-=======
->>>>>>> c2194ce025a91c52ae5b2da9cf2fb991c7fe536a
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -30,18 +25,17 @@ public class Employee {
 
 	@Column(nullable = false)
 	private String name;
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"}) 
-	@OneToOne(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private Passport passport;
-<<<<<<< HEAD
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"}) 
-	@OneToMany(cascade=CascadeType.ALL,mappedBy="employee")
+
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "employee")
 	private Set<Address> address = new HashSet<>();
 
 	@ManyToMany(cascade = CascadeType.ALL)
 	private Set<Certification> certification = new HashSet<>();
 
-	
 	public Employee() {
 	}
 
@@ -50,11 +44,6 @@ public class Employee {
 		this.id = id;
 		this.name = name;
 		this.passport = passport;
-		
-=======
-
-	protected Employee() {
->>>>>>> c2194ce025a91c52ae5b2da9cf2fb991c7fe536a
 	}
 
 	public Employee(String name) {
@@ -80,8 +69,7 @@ public class Employee {
 	public Long getId() {
 		return id;
 	}
-<<<<<<< HEAD
-	
+
 	public void setId(Long id) {
 		this.id = id;
 	}
@@ -92,12 +80,11 @@ public class Employee {
 	 * address.add(add); add.setEmployee(this); } public void removeAddress(Address
 	 * add){ address.remove(add); add.setEmployee(null); }
 	 */
-     
-    public Set<Address> getAddress() { return address; }
-    
-    
-    
-    
+
+	public Set<Address> getAddress() {
+		return address;
+	}
+
 	/*
 	 * public void setCertification(Certification idp){
 	 * 
@@ -105,9 +92,10 @@ public class Employee {
 	 * removeCertification(Certification idp){ certification.remove(idp);
 	 * idp.setEmp(null); }
 	 */
-     
-    public Set<Certification> getCertification() { return certification; }
-    
+
+	public Set<Certification> getCertification() {
+		return certification;
+	}
 
 	public void setAddress(Set<Address> address) {
 		this.address = address;
@@ -120,11 +108,6 @@ public class Employee {
 	@Override
 	public String toString() {
 		return String.format("Employee[%s]", name);
-=======
-
-	@Override
-	public String toString() {
-		return String.format("Student[%s]", name);
->>>>>>> c2194ce025a91c52ae5b2da9cf2fb991c7fe536a
 	}
+
 }
