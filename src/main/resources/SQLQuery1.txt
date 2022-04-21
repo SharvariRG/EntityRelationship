@@ -1,0 +1,18 @@
+SELECT * FROM EMPLOYEE;
+SELECT * FROM address;
+SELECT * FROM PASSPORT;
+SELECT * FROM certification;
+
+delete from address;
+delete from EMPLOYEE;
+delete from PASSPORT;
+delete from certification;
+delete from employee_certification;
+
+drop table employee ;
+drop table address;
+drop table PASSPORT;
+
+select * from employee_certification;
+update  address set employee_id='175' where id='177'; 
+insert into employee_certification values(166,'SS');

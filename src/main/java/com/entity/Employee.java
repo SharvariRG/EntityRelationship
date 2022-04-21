@@ -9,7 +9,6 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -31,7 +30,7 @@ public class Employee {
 
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "employee")
-	private Set<Address> address = new HashSet<>();
+	private Set<Address> addressList = new HashSet<>();
 
 	@ManyToMany(cascade = CascadeType.ALL)
 	private Set<Certification> certification = new HashSet<>();
@@ -63,6 +62,7 @@ public class Employee {
 	}
 
 	public void setPassport(Passport passport) {
+		passport.setEmployee(this);
 		this.passport = passport;
 	}
 
@@ -80,9 +80,13 @@ public class Employee {
 	 * address.add(add); add.setEmployee(this); } public void removeAddress(Address
 	 * add){ address.remove(add); add.setEmployee(null); }
 	 */
-
+	/*
+	 * public void addAddress(Address address) { if (addressList == null) {
+	 * addressList = new HashSet<>(); } address.setEmployee(this);
+	 * addressList.add(address); }
+	 */
 	public Set<Address> getAddress() {
-		return address;
+		return addressList;
 	}
 
 	/*
@@ -97,17 +101,21 @@ public class Employee {
 		return certification;
 	}
 
-	public void setAddress(Set<Address> address) {
-		this.address = address;
+	public void setAddress(Set<Address> addresslist) {
+		addresslist.forEach(a -> a.setEmployee(this));
+		this.addressList = addresslist;
+
 	}
 
 	public void setCertification(Set<Certification> certification) {
+		certification.forEach(a -> a.setEmp(this));
 		this.certification = certification;
 	}
 
 	@Override
 	public String toString() {
-		return String.format("Employee[%s]", name);
+		return "Employee [id=" + id + ", name=" + name + ", passport=" + passport + ", addressList=" + addressList
+				+ ", certification=" + certification + "]";
 	}
 
 }

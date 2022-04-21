@@ -19,11 +19,10 @@ public class Passport {
 	@Column(nullable = false)
 	private String number;
 	@JsonIgnore
-
 	@OneToOne(fetch = FetchType.LAZY, mappedBy = "passport")
 	private Employee employee;
 
-	protected Passport() {
+	public Passport() {
 	}
 
 	public Passport(String number) {

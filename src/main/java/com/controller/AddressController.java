@@ -1,7 +1,6 @@
 package com.controller;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,22 +15,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.entity.Employee;
-import com.service.EmployeeService;
+import com.entity.Address;
+import com.service.AddressService;
+import java.util.NoSuchElementException;
 import com.utils.ResponseModel;
 
 @RestController
 @RequestMapping("/api/v1")
-public class EmployeeController {
+public class AddressController {
 	@Autowired
-	private EmployeeService employeeService;
+	private AddressService addressService;
 
-	@GetMapping("/Employees")
-	public ResponseEntity<ResponseModel> getAllEmployees() {
+	@GetMapping("/address")
+	public ResponseEntity<ResponseModel> getAllAddress() {
 		try{
 			ResponseModel responseModel = new ResponseModel();
-		List<Employee> employeeList = employeeService.getAllEmployees();
-		responseModel.setData(employeeList);
+		List<Address> addressList = addressService.getAllAddress();
+		responseModel.setData(addressList);
 		responseModel.setMessage("Success");
 		return new ResponseEntity<ResponseModel>(responseModel, HttpStatus.OK);
 	}
@@ -41,20 +41,21 @@ public class EmployeeController {
 		} 
 	}
 
-	@GetMapping("/Employees/{EmployeeId}")
-	public ResponseEntity<ResponseModel> getEmployee(@PathVariable Long EmployeeId) throws NoSuchElementException {
+	@GetMapping("/address/{id}")
+	public ResponseEntity<ResponseModel> getAddress(@PathVariable Long id) {
 		
 		try {
 		ResponseModel responseModel=new ResponseModel();
-		Employee employee=employeeService.getEmployee(EmployeeId);
+		Address ad=addressService.getAddress(id);
     	
-    	responseModel.setData(employee);
+    	responseModel.setData(ad);
     	responseModel.setMessage("Success");
     	return new ResponseEntity<ResponseModel>(responseModel, HttpStatus.OK);
 		}
 		catch(NoSuchElementException e)
 		{
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Employee not found",e);
+			throw new ResponseStatusException(
+			           HttpStatus.NOT_FOUND, "Address Not Found",e);
 		} 
 		catch (Exception e) {
 			throw new ResponseStatusException(
@@ -62,13 +63,13 @@ public class EmployeeController {
 		} 
 	}
 
-	@PostMapping("/Employees")
-	public ResponseEntity<ResponseModel> addEmployee(@RequestBody Employee c) {
+	@PostMapping("/address")
+	public ResponseEntity<ResponseModel> addAddress(@RequestBody Address c) {
 		try {
 			ResponseModel responseModel=new ResponseModel();
 		
-			Employee employee=employeeService.addEmployee(c);
-			responseModel.setData(employee);
+			Address add=addressService.addAddress(c);
+			responseModel.setData(add);
 	    	responseModel.setMessage("Success");
 	    	return new ResponseEntity<ResponseModel>(responseModel, HttpStatus.OK);
 	    	}
@@ -79,20 +80,20 @@ public class EmployeeController {
 		
 	}
 
-	@PutMapping("Employees/{id}")
-	public ResponseEntity<ResponseModel> updateEmployee(@RequestBody Employee c, @PathVariable Long id) {
+	@PutMapping("/address/{id}")
+	public ResponseEntity<ResponseModel> updateAddress(@RequestBody Address c, @PathVariable Long id) {
 		try {
 			ResponseModel responseModel=new ResponseModel();
 		
-			Employee employee=employeeService.updateEmployee(c,id);
-			responseModel.setData(employee);
+			Address add=addressService.updateAddress(c,id);
+			responseModel.setData(add);
 	    	responseModel.setMessage("Success");
 	    	return new ResponseEntity<ResponseModel>(responseModel, HttpStatus.OK);
 	    	}
 		catch(NoSuchElementException e)
 		{
 			throw new ResponseStatusException(
-			           HttpStatus.NOT_FOUND, "Employee not found",e);
+			           HttpStatus.NOT_FOUND, "Address Not Found",e);
 		} 
 		catch (Exception e) {
 			throw new ResponseStatusException(
@@ -100,20 +101,20 @@ public class EmployeeController {
 		} 
 	}
 
-	@DeleteMapping("/Employees/{EmployeeId}")
-	public ResponseEntity<ResponseModel> deleteEmployee(@PathVariable Long EmployeeId) {
+	@DeleteMapping("/address/{id}")
+	public ResponseEntity<ResponseModel> deleteAddress(@PathVariable Long id) {
 		try {
 			ResponseModel responseModel=new ResponseModel();
 		
 			
-			responseModel.setData(employeeService.deleteEmployee(EmployeeId));
+			responseModel.setData(addressService.deleteAddress(id));
 	    	responseModel.setMessage("Success");
 	    	return new ResponseEntity<ResponseModel>(responseModel, HttpStatus.OK);
 	    	}
 		catch(NoSuchElementException e)
 		{
 			throw new ResponseStatusException(
-			           HttpStatus.NOT_FOUND, "Employee not found",e);
+			           HttpStatus.NOT_FOUND, "Address Not Found",e);
 		} 
 		catch (Exception e) {
 			throw new ResponseStatusException(

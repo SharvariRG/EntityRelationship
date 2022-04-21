@@ -1,7 +1,6 @@
 package com.controller;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,22 +15,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.entity.Employee;
-import com.service.EmployeeService;
+import com.entity.Certification;
+import com.service.CertificationService;
+import com.utils.NoSuchAccountException;
 import com.utils.ResponseModel;
 
 @RestController
 @RequestMapping("/api/v1")
-public class EmployeeController {
+public class CertificationController {
 	@Autowired
-	private EmployeeService employeeService;
+	private CertificationService certificationService;
 
-	@GetMapping("/Employees")
-	public ResponseEntity<ResponseModel> getAllEmployees() {
+	@GetMapping("/certifications")
+	public ResponseEntity<ResponseModel> getAllCertification() {
 		try{
 			ResponseModel responseModel = new ResponseModel();
-		List<Employee> employeeList = employeeService.getAllEmployees();
-		responseModel.setData(employeeList);
+		List<Certification> list = certificationService.getAllCertification();
+		responseModel.setData(list);
 		responseModel.setMessage("Success");
 		return new ResponseEntity<ResponseModel>(responseModel, HttpStatus.OK);
 	}
@@ -41,20 +41,21 @@ public class EmployeeController {
 		} 
 	}
 
-	@GetMapping("/Employees/{EmployeeId}")
-	public ResponseEntity<ResponseModel> getEmployee(@PathVariable Long EmployeeId) throws NoSuchElementException {
+	@GetMapping("/certification/{id}")
+	public ResponseEntity<ResponseModel> getCertification(@PathVariable Long id) {
 		
 		try {
 		ResponseModel responseModel=new ResponseModel();
-		Employee employee=employeeService.getEmployee(EmployeeId);
+		Certification p=certificationService.getCertification(id);
     	
-    	responseModel.setData(employee);
+    	responseModel.setData(p);
     	responseModel.setMessage("Success");
     	return new ResponseEntity<ResponseModel>(responseModel, HttpStatus.OK);
 		}
-		catch(NoSuchElementException e)
+		catch(NoSuchAccountException e)
 		{
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Employee not found",e);
+			throw new ResponseStatusException(
+			           HttpStatus.NOT_FOUND, "Account not found",e);
 		} 
 		catch (Exception e) {
 			throw new ResponseStatusException(
@@ -62,13 +63,13 @@ public class EmployeeController {
 		} 
 	}
 
-	@PostMapping("/Employees")
-	public ResponseEntity<ResponseModel> addEmployee(@RequestBody Employee c) {
+	@PostMapping("/certification")
+	public ResponseEntity<ResponseModel> addCertification(@RequestBody Certification c) {
 		try {
 			ResponseModel responseModel=new ResponseModel();
 		
-			Employee employee=employeeService.addEmployee(c);
-			responseModel.setData(employee);
+			Certification p=certificationService.addCertification(c);
+			responseModel.setData(p);
 	    	responseModel.setMessage("Success");
 	    	return new ResponseEntity<ResponseModel>(responseModel, HttpStatus.OK);
 	    	}
@@ -79,20 +80,20 @@ public class EmployeeController {
 		
 	}
 
-	@PutMapping("Employees/{id}")
-	public ResponseEntity<ResponseModel> updateEmployee(@RequestBody Employee c, @PathVariable Long id) {
+	@PutMapping("/certification/{id}")
+	public ResponseEntity<ResponseModel> updateCertification(@RequestBody Certification c, @PathVariable Long id) {
 		try {
 			ResponseModel responseModel=new ResponseModel();
 		
-			Employee employee=employeeService.updateEmployee(c,id);
-			responseModel.setData(employee);
+			Certification p=certificationService.updateCertification(c,id);
+			responseModel.setData(p);
 	    	responseModel.setMessage("Success");
 	    	return new ResponseEntity<ResponseModel>(responseModel, HttpStatus.OK);
 	    	}
-		catch(NoSuchElementException e)
+		catch(NoSuchAccountException e)
 		{
 			throw new ResponseStatusException(
-			           HttpStatus.NOT_FOUND, "Employee not found",e);
+			           HttpStatus.NOT_FOUND, "Account not found",e);
 		} 
 		catch (Exception e) {
 			throw new ResponseStatusException(
@@ -100,20 +101,20 @@ public class EmployeeController {
 		} 
 	}
 
-	@DeleteMapping("/Employees/{EmployeeId}")
-	public ResponseEntity<ResponseModel> deleteEmployee(@PathVariable Long EmployeeId) {
+	@DeleteMapping("/certification/{id}")
+	public ResponseEntity<ResponseModel> deleteCertification(@PathVariable Long id) {
 		try {
 			ResponseModel responseModel=new ResponseModel();
 		
 			
-			responseModel.setData(employeeService.deleteEmployee(EmployeeId));
+			responseModel.setData(certificationService.deleteCertification(id));
 	    	responseModel.setMessage("Success");
 	    	return new ResponseEntity<ResponseModel>(responseModel, HttpStatus.OK);
 	    	}
-		catch(NoSuchElementException e)
+		catch(NoSuchAccountException e)
 		{
 			throw new ResponseStatusException(
-			           HttpStatus.NOT_FOUND, "Employee not found",e);
+			           HttpStatus.NOT_FOUND, "Account not found",e);
 		} 
 		catch (Exception e) {
 			throw new ResponseStatusException(
