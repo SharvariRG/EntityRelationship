@@ -2,12 +2,15 @@ SELECT * FROM EMPLOYEE;
 SELECT * FROM address;
 SELECT * FROM PASSPORT;
 SELECT * FROM certification;
+SELECT * FROM  employee_certification;
+
 
 delete from address;
+delete from employee_certification;
 delete from EMPLOYEE;
 delete from PASSPORT;
 delete from certification;
-delete from employee_certification;
+
 
 drop table employee ;
 drop table address;

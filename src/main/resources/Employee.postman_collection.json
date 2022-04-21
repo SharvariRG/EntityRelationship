@@ -1,0 +1,175 @@
+{
+	"info": {
+		"_postman_id": "ce88e74c-c200-4a7e-9801-f87ee8f37df5",
+		"name": "Employee",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GetAll",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/Employees/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"Employees",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PostOne",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"X1\",\r\n  \"passport\": {\r\n    \"number\": \"197\"\r\n  },\r\n  \"address\": \r\n   [ {\r\n      \"addressLine\": \"Addr1\",\r\n      \"addressType\": \"Permanent\"\r\n    },\r\n     {\r\n      \"addressLine\": \"Addr2\",\r\n      \"addressType\": \"Permanent\"\r\n    }],\r\n  \"certification\":\r\n  [{\r\n      \"certNumber\":\"C1\"\r\n  },\r\n  {\r\n      \"certNumber\":\"C2\"\r\n  }]\r\n  \r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/Employees/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"Employees",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PutOne",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"X123\",\r\n  \"passport\": {\r\n    \"number\": \"P1971\"\r\n  },\r\n  \"address\": \r\n   [ {\r\n       \"id\":\"326\",\r\n      \"addressLine\": \"Addr12345\",\r\n      \"addressType\": \"Permanent\"\r\n    },\r\n     {\r\n      \"id\":\"326\",\r\n      \"addressLine\": \"Addr2\",\r\n      \"addressType\": \"Permanent\"\r\n    }],\r\n  \"certification\":\r\n  [{\r\n      \"id\":\"328\",\r\n      \"certNumber\":\"C12\"\r\n  },\r\n  {\"id\":\"329\",\r\n      \"certNumber\":\"C22\"\r\n  }]\r\n  \r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/Employees/324",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"Employees",
+						"324"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteOne",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/Employees/222",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"Employees",
+						"222"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "  "
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/Employees/216",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"Employees",
+						"216"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
